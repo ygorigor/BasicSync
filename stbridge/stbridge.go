@@ -173,8 +173,8 @@ type SyncthingApp struct {
 	guiCert *x509.Certificate
 }
 
-func (app *SyncthingApp) Stop() {
-	app.app.Stop(svcutil.ExitSuccess)
+func (app *SyncthingApp) StopAsync() {
+	go app.app.Stop(svcutil.ExitSuccess)
 }
 
 func (app *SyncthingApp) GuiAddress() string {

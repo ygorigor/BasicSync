@@ -421,7 +421,7 @@ class SyncthingService : Service(), SyncthingStatusReceiver,
                 || isRunning != shouldRun) {
             if (app != null) {
                 Log.d(TAG, "Syncthing is running; stopping service")
-                app.stop()
+                app.stopAsync()
             } else {
                 Log.d(TAG, "Syncthing is not running; waking thread")
                 stateLock.notify()
