@@ -7,6 +7,10 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Version 1.3
+
+* By default, don't run when Android's battery saver mode is enabled (configurable) ([PR #7])
+
 ### Version 1.2
 
 * Consider plugged in device as charging (eg. when device reached charge limit) ([PR #3])
@@ -31,3 +35,4 @@
 [PR #4]: https://github.com/chenxiaolong/BasicSync/pull/4
 [PR #5]: https://github.com/chenxiaolong/BasicSync/pull/5
 [PR #6]: https://github.com/chenxiaolong/BasicSync/pull/6
+[PR #7]: https://github.com/chenxiaolong/BasicSync/pull/7
