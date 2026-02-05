@@ -1,3 +1,6 @@
 [submodule "external/syncthing"]
 	path = external/syncthing
 	url = https://github.com/chenxiaolong/syncthing.git
+[submodule "external/go"]
+	path = external/go
+	url = https://github.com/chenxiaolong/go.git
