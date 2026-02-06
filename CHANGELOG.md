@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 1.5
 
 * Enable MTE on supported devices ([Issue #12], [PR #13])
 
