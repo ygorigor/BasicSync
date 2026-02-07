@@ -96,7 +96,6 @@ function hideParent(child, predicate) {
 
 var elemFolderPath = undefined;
 var elemShareDeviceIdButtons = undefined;
-var elemDeviceId = undefined;
 
 const actionsToHide = new Set([
     // Hide the log out button so the user doesn't get into a state where they have to restart the
@@ -135,10 +134,6 @@ function tryMutate() {
         }
     }
 
-    if (!elemDeviceId) {
-        elemDeviceId = document.getElementById('deviceID');
-    }
-
     for (const className of actionsToHide) {
         const icon = document.getElementsByClassName(className)[0];
         if (icon) {
@@ -159,7 +154,6 @@ function tryMutate() {
 
     return !!elemFolderPath
         && !!elemShareDeviceIdButtons
-        && !!elemDeviceId
         && actionsToHide.size == 0
         && settingsToDisable.size == 0;
 }
@@ -170,6 +164,7 @@ function onFolderSelected(path) {
 }
 
 function onDeviceIdScanned(deviceId) {
+    const elemDeviceId = document.getElementById('deviceID');
     elemDeviceId.value = deviceId;
     elemDeviceId.dispatchEvent(new InputEvent('input'));
 }
