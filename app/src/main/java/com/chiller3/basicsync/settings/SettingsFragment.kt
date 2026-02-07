@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2023-2025 Andrew Gunnerson
+ * SPDX-FileCopyrightText: 2023-2026 Andrew Gunnerson
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
@@ -19,6 +19,7 @@ import androidx.core.content.IntentCompat
 import androidx.core.content.PackageManagerCompat
 import androidx.core.content.UnusedAppRestrictionsConstants
 import androidx.core.net.toUri
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -34,9 +35,11 @@ import com.chiller3.basicsync.Preferences
 import com.chiller3.basicsync.R
 import com.chiller3.basicsync.binding.stbridge.Stbridge
 import com.chiller3.basicsync.dialog.MessageDialogFragment
+import com.chiller3.basicsync.dialog.MinBatteryLevelDialogFragment
 import com.chiller3.basicsync.extension.formattedString
 import com.chiller3.basicsync.syncthing.SyncthingService
 import com.chiller3.basicsync.view.LongClickablePreference
+import com.chiller3.basicsync.view.SplitSwitchPreference
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
@@ -78,7 +81,7 @@ class SettingsFragment : PreferenceBaseFragment(), Preference.OnPreferenceClickL
     private lateinit var prefExportConfiguration: Preference
     private lateinit var prefServiceStatus: SwitchPreferenceCompat
     private lateinit var prefAutoMode: SwitchPreferenceCompat
-    private lateinit var prefRequireSufficientBattery: SwitchPreferenceCompat
+    private lateinit var prefRunOnBattery: SplitSwitchPreference
     private lateinit var prefVersion: LongClickablePreference
     private lateinit var prefSaveLogs: Preference
 
@@ -163,7 +166,8 @@ class SettingsFragment : PreferenceBaseFragment(), Preference.OnPreferenceClickL
         prefAutoMode = findPreference(Preferences.PREF_AUTO_MODE)!!
         prefAutoMode.onPreferenceChangeListener = this
 
-        prefRequireSufficientBattery = findPreference(Preferences.PREF_REQUIRE_SUFFICIENT_BATTERY)!!
+        prefRunOnBattery = findPreference(Preferences.PREF_RUN_ON_BATTERY)!!
+        prefRunOnBattery.onPreferenceClickListener = this
 
         prefVersion = findPreference(Preferences.PREF_VERSION)!!
         prefVersion.onPreferenceClickListener = this
@@ -220,6 +224,12 @@ class SettingsFragment : PreferenceBaseFragment(), Preference.OnPreferenceClickL
                         onAlert(alert)
                     }
                 }
+            }
+        }
+
+        setFragmentResultListener(MinBatteryLevelDialogFragment.TAG) { _, bundle: Bundle ->
+            if (bundle.getBoolean(MinBatteryLevelDialogFragment.RESULT_SUCCESS)) {
+                refreshBattery()
             }
         }
     }
@@ -307,7 +317,8 @@ class SettingsFragment : PreferenceBaseFragment(), Preference.OnPreferenceClickL
         val intent = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         val hasBattery = intent?.getBooleanExtra(BatteryManager.EXTRA_PRESENT, false) == true
 
-        prefRequireSufficientBattery.isVisible = hasBattery
+        prefRunOnBattery.isVisible = hasBattery
+        prefRunOnBattery.summary = getString(R.string.pref_run_on_battery_desc, prefs.minBatteryLevel)
     }
 
     private fun refreshVersion() {
@@ -381,6 +392,13 @@ class SettingsFragment : PreferenceBaseFragment(), Preference.OnPreferenceClickL
                 val defaultName = "${getString(R.string.app_name_release)}_$timestamp"
 
                 requestSafExportConfiguration.launch(defaultName)
+                return true
+            }
+            prefRunOnBattery -> {
+                MinBatteryLevelDialogFragment().show(
+                    parentFragmentManager.beginTransaction(),
+                    MinBatteryLevelDialogFragment.TAG,
+                )
                 return true
             }
             prefVersion -> {

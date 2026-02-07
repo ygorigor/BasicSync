@@ -47,10 +47,6 @@ class SyncthingService : Service(), SyncthingStatusReceiver,
         val ACTION_STOP = "${SyncthingService::class.java.canonicalName}.stop"
         val ACTION_RENOTIFY = "${SyncthingService::class.java.canonicalName}.renotify"
 
-        // We can't query config_lowBatteryWarningLevel due to Android's hidden API restrictions, so
-        // just use AOSP's default.
-        private const val LOW_BATTERY_LIMIT = 20
-
         fun createIntent(context: Context, action: String?) =
             Intent(context, SyncthingService::class.java).apply {
                 this.action = action
@@ -195,7 +191,9 @@ class SyncthingService : Service(), SyncthingStatusReceiver,
     @GuardedBy("stateLock")
     private var networkSufficient = false
     @GuardedBy("stateLock")
-    private var batterySufficient = false
+    private var isPluggedIn = false
+    @GuardedBy("stateLock")
+    private var batteryLevel = 0
     @GuardedBy("stateLock")
     private var isBatterySaverMode = false
 
@@ -208,7 +206,7 @@ class SyncthingService : Service(), SyncthingStatusReceiver,
         @GuardedBy("stateLock")
         get() = networkConnected
                 && (!prefs.requireUnmeteredNetwork || networkSufficient)
-                && (!prefs.requireSufficientBattery || batterySufficient)
+                && (isPluggedIn || (prefs.runOnBattery && batteryLevel >= prefs.minBatteryLevel))
                 && (!prefs.respectBatterySaver || !isBatterySaverMode)
 
     private val shouldRun: Boolean
@@ -299,20 +297,17 @@ class SyncthingService : Service(), SyncthingStatusReceiver,
     private val batteryStatusReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val present = intent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, false)
-
-            val status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
-            val isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING
-                    || status == BatteryManager.BATTERY_STATUS_FULL
-                    || intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0
+            val plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0
 
             val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
             val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
             val scaledLevel = (level * 100 / scale.toFloat()).roundToInt()
 
-            Log.d(TAG, "Battery state changed: present=$present, charging=$isCharging, level=$scaledLevel")
+            Log.d(TAG, "Battery state changed: present=$present, plugged=$plugged, level=$scaledLevel")
 
             synchronized(stateLock) {
-                batterySufficient = !present || isCharging || scaledLevel >= LOW_BATTERY_LIMIT
+                isPluggedIn = !present || plugged
+                batteryLevel = scaledLevel
 
                 stateChanged()
             }
@@ -418,7 +413,8 @@ class SyncthingService : Service(), SyncthingStatusReceiver,
             Preferences.PREF_MANUAL_MODE,
             Preferences.PREF_MANUAL_SHOULD_RUN,
             Preferences.PREF_REQUIRE_UNMETERED_NETWORK,
-            Preferences.PREF_REQUIRE_SUFFICIENT_BATTERY,
+            Preferences.PREF_RUN_ON_BATTERY,
+            Preferences.PREF_MIN_BATTERY_LEVEL,
             Preferences.PREF_RESPECT_BATTERY_SAVER,
             Preferences.PREF_KEEP_ALIVE -> stateChanged()
             Preferences.PREF_DEBUG_MODE -> setLogLevel()

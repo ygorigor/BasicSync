@@ -89,11 +89,10 @@
             app:summary="@string/pref_require_unmetered_network_desc"
             app:iconSpaceReserved="false" />
 
-        <SwitchPreferenceCompat
-            app:key="require_sufficient_battery"
+        <com.chiller3.basicsync.view.SplitSwitchPreference
+            app:key="run_on_battery"
             app:defaultValue="true"
-            app:title="@string/pref_require_sufficient_battery_name"
-            app:summary="@string/pref_require_sufficient_battery_desc"
+            app:title="@string/pref_run_on_battery_name"
             app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat

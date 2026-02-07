@@ -31,8 +31,8 @@
     <string name="pref_auto_mode_desc">Automatically start and stop based on the specified conditions.</string>
     <string name="pref_require_unmetered_network_name">Require unmetered network</string>
     <string name="pref_require_unmetered_network_desc">Only run if the device is connected to an unmetered network (eg. Wi-Fi).</string>
-    <string name="pref_require_sufficient_battery_name">Require sufficient battery level</string>
-    <string name="pref_require_sufficient_battery_desc">Only run if the battery level is not low or if the device is charging.</string>
+    <string name="pref_run_on_battery_name">Run on battery power</string>
+    <string name="pref_run_on_battery_desc">Run when the device is on battery power and the battery level is at least %1$d%%. Syncthing always runs when plugged in.</string>
     <string name="pref_respect_battery_saver_name">Respect battery saver mode</string>
     <string name="pref_respect_battery_saver_desc">Only run when Android\'s battery saver mode is disabled.</string>
     <string name="pref_keep_alive_name">Keep Syncthing alive</string>
@@ -57,6 +57,9 @@
     <string name="dialog_new_folder_title">New folder</string>
     <string name="dialog_new_folder_message">Enter the name of the new folder to create in %1$s.</string>
     <string name="dialog_new_folder_hint">Name</string>
+    <string name="dialog_min_battery_level_title">Minimum battery level</string>
+    <string name="dialog_min_battery_level_message">Enter the minimum battery level needed for Syncthing to run.</string>
+    <string name="dialog_min_battery_level_hint">Percentage</string>
 
     <!-- Web UI extra buttons -->
     <string name="web_ui_select_folder">Select folder</string>

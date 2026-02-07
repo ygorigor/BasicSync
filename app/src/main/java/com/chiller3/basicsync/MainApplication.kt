@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2023-2025 Andrew Gunnerson
+ * SPDX-FileCopyrightText: 2023-2026 Andrew Gunnerson
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
@@ -34,7 +34,9 @@ class MainApplication : Application() {
 
         Notifications(this).updateChannels()
 
-        // Enable Material You colors
+        // Enable Material You colors.
         DynamicColors.applyToActivitiesIfAvailable(this)
+
+        Preferences(this).migrate()
     }
 }

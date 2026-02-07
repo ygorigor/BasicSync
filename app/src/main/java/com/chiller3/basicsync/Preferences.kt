@@ -18,7 +18,8 @@ class Preferences(context: Context) {
 
         // Main preferences.
         const val PREF_REQUIRE_UNMETERED_NETWORK = "require_unmetered_network"
-        const val PREF_REQUIRE_SUFFICIENT_BATTERY = "require_sufficient_battery"
+        const val PREF_RUN_ON_BATTERY = "run_on_battery"
+        const val PREF_MIN_BATTERY_LEVEL = "min_battery_level"
         const val PREF_RESPECT_BATTERY_SAVER = "respect_battery_saver"
         const val PREF_KEEP_ALIVE = "keep_alive"
 
@@ -39,6 +40,9 @@ class Preferences(context: Context) {
         const val PREF_DEBUG_MODE = "debug_mode"
         const val PREF_MANUAL_MODE = "manual_mode"
         const val PREF_MANUAL_SHOULD_RUN = "manual_should_run"
+
+        // Legacy preferences.
+        private const val PREF_REQUIRE_SUFFICIENT_BATTERY = "require_sufficient_battery"
     }
 
     private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
@@ -55,9 +59,13 @@ class Preferences(context: Context) {
         get() = prefs.getBoolean(PREF_REQUIRE_UNMETERED_NETWORK, true)
         set(enabled) = prefs.edit { putBoolean(PREF_REQUIRE_UNMETERED_NETWORK, enabled) }
 
-    var requireSufficientBattery: Boolean
-        get() = prefs.getBoolean(PREF_REQUIRE_SUFFICIENT_BATTERY, true)
-        set(enabled) = prefs.edit { putBoolean(PREF_REQUIRE_SUFFICIENT_BATTERY, enabled) }
+    var runOnBattery: Boolean
+        get() = prefs.getBoolean(PREF_RUN_ON_BATTERY, true)
+        set(enabled) = prefs.edit { putBoolean(PREF_RUN_ON_BATTERY, enabled) }
+
+    var minBatteryLevel: Int
+        get() = prefs.getInt(PREF_MIN_BATTERY_LEVEL, 20)
+        set(level) = prefs.edit { putInt(PREF_MIN_BATTERY_LEVEL, level) }
 
     var respectBatterySaver: Boolean
         get() = prefs.getBoolean(PREF_RESPECT_BATTERY_SAVER, true)
@@ -78,4 +86,14 @@ class Preferences(context: Context) {
     var manualShouldRun: Boolean
         get() = prefs.getBoolean(PREF_MANUAL_SHOULD_RUN, false)
         set(enabled) = prefs.edit { putBoolean(PREF_MANUAL_SHOULD_RUN, enabled) }
+
+    fun migrate() {
+        if (prefs.contains(PREF_REQUIRE_SUFFICIENT_BATTERY)) {
+            if (!prefs.getBoolean(PREF_REQUIRE_SUFFICIENT_BATTERY, true)) {
+                minBatteryLevel = 0
+            }
+
+            prefs.edit { remove(PREF_REQUIRE_SUFFICIENT_BATTERY) }
+        }
+    }
 }
