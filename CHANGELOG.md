@@ -7,6 +7,11 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Unreleased
+
+* Reenable default proguard optimizations ([PR #21])
+  * For folks who want to decode stack traces from log files, the mapping files are now included with the official releases in `mappings.tar.zst`
+
 ### Version 1.6
 
 * Fix save button not being enabled after selecting a folder path or scanning a device QR code ([PR #15])
@@ -66,3 +71,4 @@
 [PR #17]: https://github.com/chenxiaolong/BasicSync/pull/17
 [PR #18]: https://github.com/chenxiaolong/BasicSync/pull/18
 [PR #19]: https://github.com/chenxiaolong/BasicSync/pull/19
+[PR #21]: https://github.com/chenxiaolong/BasicSync/pull/21
