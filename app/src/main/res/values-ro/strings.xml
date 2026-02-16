@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-FileCopyrightText: 2025-2026 Andrew Gunnerson
+    SPDX-License-Identifier: GPL-3.0-only
+-->
+<resources>
+    <!-- Preference headers -->
+    <string name="pref_header_permissions">Permisiuni</string>
+    <string name="pref_header_configuration">Configurare</string>
+    <string name="pref_header_run_conditions">Condiții de rulare</string>
+    <string name="pref_header_about">Despre</string>
+    <string name="pref_header_debug">Depanare</string>
+
+    <!-- Main preferences -->
+    <string name="pref_inhibit_battery_opt_name">Dezactivează optimizarea bateriei</string>
+    <string name="pref_inhibit_battery_opt_desc">Necesar pentru a rula fiabil în fundal.</string>
+    <string name="pref_allow_notifications_name">Permite notificările</string>
+    <string name="pref_allow_notifications_desc">Necesar pentru a rula fiabil în fundal și pentru a porni și opri Syncthing.</string>
+    <string name="pref_local_storage_access_name">Permite accesul la stocarea locală</string>
+    <string name="pref_local_storage_access_desc">Necesar pentru Syncthing pentru a accesa stocarea locală din <tt>/sdcard</tt>.</string>
+    <string name="pref_disable_app_hibernation_name">Dezactivează hibernarea aplicației</string>
+    <string name="pref_disable_app_hibernation_desc">Necesar pentru a împiedica Android să elimine automat permisiunile aplicației după o perioadă de timp.</string>
+    <string name="pref_open_web_ui_name">Deschide interfața web</string>
+    <string name="pref_open_web_ui_desc">Deschide interfață de configurare web Syncthing.</string>
+    <string name="pref_import_configuration_name">Import configurație</string>
+    <string name="pref_import_configuration_desc">Importă un fișier zip de configurare Syncthing existent.</string>
+    <string name="pref_export_configuration_name">Export configurație</string>
+    <string name="pref_export_configuration_desc">Exportă configurația curentă de sincronizare într-un fișier zip.</string>
+    <string name="pref_service_status_name">Stare Syncthing</string>
+    <string name="pref_auto_mode_name">Mod automat</string>
+    <string name="pref_auto_mode_desc">Pornește și oprește automat în funcție de condițiile specificate.</string>
+    <string name="pref_network_conditions_name">Condiții de rețea</string>
+    <string name="pref_network_conditions_desc">Rulează când te conectezi la anumite tipuri de rețele sau rețele Wi-Fi.</string>
+    <string name="pref_run_on_battery_name">Rulează pe baterie</string>
+    <string name="pref_run_on_battery_desc">Rulează când dispozitivul este alimentat de la baterie și nivelul bateriei este de cel puțin %1$d%%. Syncthing rulează întotdeauna când este conectat la priză.</string>
+    <string name="pref_respect_battery_saver_name">Respectă modul de economisire a bateriei</string>
+    <string name="pref_respect_battery_saver_desc">Rulează numai când modul de economisire a bateriei Android este dezactivat.</string>
+    <string name="pref_keep_alive_name">Păstrează Syncthing pornit</string>
+    <string name="pref_keep_alive_desc">Atunci când Syncthing nu ar trebui să ruleze, se întrerupe în loc să fie oprit. Evită o potențială afectare a performanței la scanarea dosarelor mari la pornire.</string>
+    <string name="pref_version_name">Versiune</string>
+    <string name="pref_save_logs_name">Salvează jurnalele</string>
+    <string name="pref_save_logs_desc">Salvează jurnalele logcat într-un fișier.</string>
+
+    <!-- Network condition preferences -->
+    <string name="pref_header_allowed_network_types">Tipuri de rețele permise</string>
+    <string name="pref_header_allowed_wifi_networks">Rețele Wi-Fi permise</string>
+    <string name="pref_header_available_wifi_networks">Rețele Wi-Fi disponibile</string>
+    <string name="pref_require_unmetered_network_name">Necesită rețea necontorizată</string>
+    <string name="pref_network_allow_wifi_name">Permite Wi-Fi</string>
+    <string name="pref_network_allow_cellular_name">Permite date mobile</string>
+    <string name="pref_network_allow_ethernet_name">Permite ethernet</string>
+    <string name="pref_network_allow_other_name">Permite alte interfețe de rețea</string>
+    <string name="pref_location_optional_info">Permisiunile de localizare sunt opționale și sunt necesare numai atunci când restricționezi rețelele Wi-Fi permise. Chiar dacă permisiunile sunt acordate, acestea nu vor fi utilizate decât dacă sunt configurate rețele Wi-Fi permise.</string>
+    <string name="pref_allow_precise_location_name">Permite accesul precis la locație</string>
+    <string name="pref_allow_precise_location_desc">Necesar pentru a accesa detaliile conexiunii Wi-Fi.</string>
+    <string name="pref_allow_background_location_name">Permite accesul la locație în fundal</string>
+    <string name="pref_allow_background_location_desc">Necesar pentru accesarea detaliilor conexiunii Wi-Fi în fundal.</string>
+    <string name="pref_wifi_networks_info">Când utilizezi Wi-Fi, rulează numai dacă este conectat la rețelele specificate. Dacă nu sunt specificate rețele, atunci toate rețelele sunt permise.</string>
+    <string name="pref_add_wifi_network_name">Adaugă manual rețeaua Wi-Fi</string>
+
+    <!-- Alerts -->
+    <string name="action_details">Detalii</string>
+    <string name="dialog_error_details_title">Detalii eroare</string>
+
+    <!-- Main alerts -->
+    <string name="alert_import_success">Configurație importată cu succes</string>
+    <string name="alert_import_failure">Nu s-a putut importa configurația</string>
+    <string name="alert_export_success">Configurație exportată cu succes</string>
+    <string name="alert_export_failure">Nu s-a putut exporta configurația</string>
+    <string name="alert_logcat_success">Jurnale salvate cu succes în %1$s</string>
+    <string name="alert_logcat_failure">Nu s-au salvat jurnalele în %1$s</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_new_folder_title">Dosar nou</string>
+    <string name="dialog_new_folder_message">Introdu numele noului dosar pentru a fi creat în %1$s.</string>
+    <string name="dialog_new_folder_hint">Nume</string>
+    <string name="dialog_min_battery_level_title">Nivel minim al bateriei</string>
+    <string name="dialog_min_battery_level_message">Introdu nivelul minim al bateriei necesar pentru ca Syncthing să ruleze.</string>
+    <string name="dialog_min_battery_level_hint">Procentaj</string>
+    <string name="dialog_wifi_network_title">Rețea Wi-Fi</string>
+    <string name="dialog_wifi_network_message">Introdu numele (SSID) al rețelei Wi-Fi. Acest lucru funcționează și pentru rețelele Wi-Fi ascunse.</string>
+    <string name="dialog_wifi_network_hint">SSID</string>
+
+    <!-- Web UI extra buttons -->
+    <string name="web_ui_select_folder">Selectează dosarul</string>
+    <string name="web_ui_scan_qr_code">Scanează codul QR</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_persistent_name">Servicii de fundal</string>
+    <string name="notification_channel_persistent_desc">Păstrează Syncthing să ruleze în fundal</string>
+    <string name="notification_channel_failure_name">Alerte de defecțiuni</string>
+    <string name="notification_channel_failure_desc">Alerte pentru erori la pornirea Syncthing</string>
+    <string name="notification_persistent_running_title">Syncthing rulează</string>
+    <string name="notification_persistent_not_running_title">Syncthing nu rulează</string>
+    <string name="notification_persistent_paused_title">Syncthing întrerupt</string>
+    <string name="notification_persistent_starting_title">Syncthing pornește</string>
+    <string name="notification_persistent_stopping_title">Syncthing se oprește</string>
+    <string name="notification_persistent_pausing_title">Syncthing se întrerupe</string>
+    <string name="notification_persistent_importing_title">Se importă configurația</string>
+    <string name="notification_persistent_exporting_title">Se exportă configurația</string>
+    <string name="notification_failure_run_title">Syncthing nu a putut porni</string>
+    <string name="notification_failure_run_message">Syncthing nu a reușit să ruleze corect. Pentru a preveni o buclă de repornire, Syncthing a fost oprit și setat în modul manual.</string>
+    <string name="notification_action_auto_mode">Mod automat</string>
+    <string name="notification_action_manual_mode">Mod manual</string>
+    <string name="notification_action_start">Pornește</string>
+    <string name="notification_action_stop">Oprește</string>
+</resources>
