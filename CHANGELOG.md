@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 1.7
 
 * Reenable default proguard optimizations ([PR #21], [PR #22])
   * For folks who want to decode stack traces from log files, the mapping files are now included with the official releases in `mappings.tar.zst`
