@@ -13,6 +13,7 @@
   * For folks who want to decode stack traces from log files, the mapping files are now included with the official releases in `mappings.tar.zst`
 * Don't fail the build if some languages have missing strings in their translations ([PR #24])
 * Add Romanian translations ([PR #23])
+* Add support for Android's per-app language setting ([PR #25])
 
 ### Version 1.6
 
@@ -77,3 +78,4 @@
 [PR #22]: https://github.com/chenxiaolong/BasicSync/pull/22
 [PR #23]: https://github.com/chenxiaolong/BasicSync/pull/23
 [PR #24]: https://github.com/chenxiaolong/BasicSync/pull/24
+[PR #25]: https://github.com/chenxiaolong/BasicSync/pull/25
