@@ -12,7 +12,8 @@
 * Shut down all listening sockets when syncthing is paused ([Issue #26], [PR #27])
 * Add support for importing and exporting encrypted zip files ([Issue #29], [PR #30])
 * Ensure that the golang fork is always used, even if the host toolchain is newer ([PR #31])
-* Update dependencies ([PR #32])
+* Update dependencies ([PR #32], [PR #33])
+  * Includes quic-go update that fixes intermittent crashes.
 
 ### Version 1.7
 
@@ -92,3 +93,4 @@
 [PR #30]: https://github.com/chenxiaolong/BasicSync/pull/30
 [PR #31]: https://github.com/chenxiaolong/BasicSync/pull/31
 [PR #32]: https://github.com/chenxiaolong/BasicSync/pull/32
+[PR #33]: https://github.com/chenxiaolong/BasicSync/pull/33
