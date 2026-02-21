@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 1.8
 
 * Shut down all listening sockets when syncthing is paused ([Issue #26], [PR #27])
 * Add support for importing and exporting encrypted zip files ([Issue #29], [PR #30], [PR #34])
