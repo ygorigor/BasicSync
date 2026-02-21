@@ -287,6 +287,7 @@ val goenv = tasks.register("goenv") {
     val envVars = arrayOf(
         "GOPROXY",
         "GOSUMDB",
+        "GOTOOLCHAIN",
         "GOFLAGS",
     ).associateWith { System.getenv(it) }
     val goModFile = File(stbridgeSrcDir, "go.mod")
@@ -303,6 +304,7 @@ val goenv = tasks.register("goenv") {
             // https://src.fedoraproject.org/rpms/golang/c/1a696ebca1b2d5227921924d3f9885e18cf445b5
             "GOPROXY" to "https://proxy.golang.org,direct",
             "GOSUMDB" to "sum.golang.org",
+            "GOTOOLCHAIN" to "local",
             "GOFLAGS" to "-ldflags=-buildid= -buildvcs=false",
         )
 
