@@ -377,7 +377,7 @@ class SettingsFragment : PreferenceBaseFragment(), FragmentResultListener,
             TAG_IMPORT_EXPORT_PASSWORD -> {
                 if (bundle.getBoolean(PasswordDialogFragment.RESULT_SUCCESS)) {
                     val password = bundle.getString(PasswordDialogFragment.RESULT_PASSWORD)!!
-                    viewModel.setImportExportPassword(password.ifEmpty { null })
+                    viewModel.setImportExportPassword(SyncthingService.Password(password))
                 } else {
                     viewModel.cancelPendingImportExport()
                 }

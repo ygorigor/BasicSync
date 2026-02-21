@@ -137,7 +137,7 @@ class SyncthingService : Service(), SyncthingStatusReceiver, DeviceStateListener
     sealed interface PreRunAction {
         fun perform(context: Context)
 
-        data class Import(val uri: Uri, val password: Password?) : PreRunAction {
+        data class Import(val uri: Uri, val password: Password) : PreRunAction {
             override fun perform(context: Context) {
                 @SuppressLint("Recycle")
                 val fd = context.contentResolver.openFileDescriptor(uri, "r")
@@ -152,7 +152,7 @@ class SyncthingService : Service(), SyncthingStatusReceiver, DeviceStateListener
             }
         }
 
-        data class Export(val uri: Uri, val password: Password?) : PreRunAction {
+        data class Export(val uri: Uri, val password: Password) : PreRunAction {
             override fun perform(context: Context) {
                 @SuppressLint("Recycle")
                 val fd = context.contentResolver.openFileDescriptor(uri, "wt")
@@ -548,7 +548,7 @@ class SyncthingService : Service(), SyncthingStatusReceiver, DeviceStateListener
             }
         }
 
-        fun importConfiguration(uri: Uri, password: Password?) {
+        fun importConfiguration(uri: Uri, password: Password) {
             synchronized(stateLock) {
                 Log.d(TAG, "Scheduling configuration import: $uri")
 
@@ -557,7 +557,7 @@ class SyncthingService : Service(), SyncthingStatusReceiver, DeviceStateListener
             }
         }
 
-        fun exportConfiguration(uri: Uri, password: Password?) {
+        fun exportConfiguration(uri: Uri, password: Password) {
             synchronized(stateLock) {
                 Log.d(TAG, "Scheduling configuration export: $uri")
 

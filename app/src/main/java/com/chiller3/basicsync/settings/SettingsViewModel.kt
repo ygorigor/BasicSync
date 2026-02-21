@@ -29,7 +29,7 @@ enum class ImportExportMode {
 data class ImportExportState(
     val mode: ImportExportMode,
     val uri: Uri,
-    val password: SyncthingService.Password?,
+    val password: SyncthingService.Password,
     val status: Status,
 ) {
     enum class Status {
@@ -88,21 +88,23 @@ class SettingsViewModel(application: Application) : ServiceBaseViewModel(applica
             ImportExportMode.EXPORT -> ImportExportState.Status.NEED_PASSWORD
         }
 
-        _importExportState.update { ImportExportState(mode, uri, null, status) }
+        _importExportState.update {
+            ImportExportState(mode, uri, SyncthingService.Password(""), status)
+        }
 
         if (status == ImportExportState.Status.IN_PROGRESS) {
             performImportExport()
         }
     }
 
-    fun setImportExportPassword(password: String?) {
+    fun setImportExportPassword(password: SyncthingService.Password) {
         if (importExportState.value == null) {
             throw IllegalStateException("Import/export not started")
         }
 
         _importExportState.update {
             it!!.copy(
-                password = password?.let(SyncthingService::Password),
+                password = password,
                 status = ImportExportState.Status.IN_PROGRESS,
             )
         }
