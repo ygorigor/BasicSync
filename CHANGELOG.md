@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 1.10
 
 * Add option to respect Android's auto-sync data setting ([Issue #39], [PR #40])
   * This is enabled by default.
